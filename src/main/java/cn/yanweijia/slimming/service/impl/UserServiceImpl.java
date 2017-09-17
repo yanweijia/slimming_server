@@ -14,8 +14,8 @@ public class UserServiceImpl implements IUserService {
     @Resource
     private IUserDAO userDao;
 
-    public User selectUser(long userId) {
-        return this.userDao.selectUser(userId);
+    public User selectUser(Integer userId) {
+        return userDao.selectByPrimaryKey(userId);
     }
 
 }

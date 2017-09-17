@@ -17,8 +17,8 @@ public class IUserDAOTest {
 
     @Test
     public void testSelectUser() throws Exception {
-        long id = 1;
-        User user = dao.selectUser(id);
+        Integer id = 1;
+        User user = dao.selectByPrimaryKey(id);
         System.out.println(user.getUsername());
     }
 

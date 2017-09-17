@@ -22,7 +22,7 @@ public class UserController {
 
     @RequestMapping(value = "/showUser.do" , method = RequestMethod.GET)
     public void selectUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        long userId = Long.parseLong(request.getParameter("id"));
+        Integer userId = Integer.parseInt(request.getParameter("id"));
         User user = this.userService.selectUser(userId);
         ObjectMapper mapper = new ObjectMapper();
         response.getWriter().write(mapper.writeValueAsString(user));
