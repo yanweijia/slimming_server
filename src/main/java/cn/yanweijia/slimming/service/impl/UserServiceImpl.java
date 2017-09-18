@@ -4,10 +4,12 @@ import cn.yanweijia.slimming.dao.IUserDAO;
 import cn.yanweijia.slimming.model.User;
 import cn.yanweijia.slimming.model.UserExample;
 import cn.yanweijia.slimming.service.IUserService;
+import cn.yanweijia.slimming.utils.RequestUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
@@ -159,7 +161,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public int register(String username, String password) {
+    public int register(HttpServletRequest request, String username, String password) {
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password) || password.length() != 32)
             return REGISTER_FAIL_PARAM_ILLEGAL;
         UserExample userExample = new UserExample();
@@ -174,7 +176,9 @@ public class UserServiceImpl implements IUserService {
             user.setStatus((byte) 0);
             user.setRegTime(new Date());
             user.setLastLogin(new Date());
-            user.setRegIp("");
+            String ipAddr = RequestUtils.getIPAddr(request);
+            ipAddr = ipAddr.length()>50?ipAddr.substring(0,50):ipAddr;
+            user.setRegIp(ipAddr);
             if (userDao.insertSelective(user) == 0)
                 return REGISTER_FAIL_SYS_ERR;
         }

@@ -6,7 +6,6 @@ import cn.yanweijia.slimming.service.impl.UserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -119,7 +118,7 @@ public class UserController {
             success = true;
         }
         map.put("success", success);
-        map.put("message", (success ? "注销成功!" : "注销失败,您本来就不在线上!"));
+        map.put("message", (success ? "注销成功!" : "您本来就不在线上!"));
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 }

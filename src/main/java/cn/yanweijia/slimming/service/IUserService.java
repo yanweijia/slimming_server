@@ -2,6 +2,7 @@ package cn.yanweijia.slimming.service;
 
 import cn.yanweijia.slimming.model.User;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public interface IUserService {
@@ -82,6 +83,6 @@ public interface IUserService {
      * @param password 密码
      * @return 常量:UserServiceImpl.REGISTER_开头
      */
-    int register(String username, String password);
+    int register(HttpServletRequest request,String username, String password);
 
 }

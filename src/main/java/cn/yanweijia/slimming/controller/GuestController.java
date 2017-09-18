@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +39,6 @@ public class GuestController {
         Map<String, Object> map = new HashMap<>();
         int loginStatus = userService.login(httpSession, username, password);
 
-
         map.put("success", loginStatus == UserServiceImpl.LOGIN_SUCCESS);
         String msg;
         switch (loginStatus) {
@@ -54,9 +54,8 @@ public class GuestController {
             case UserServiceImpl.LOGIN_INPUT_ILLEGAL:
                 msg = "请提供完整的账号密码.";
                 break;
-            default: {
+            default:
                 msg = "未知异常,无法登录,请联系管理员!";
-            }
         }
         map.put("message", msg);
         return new ResponseEntity<>(map, HttpStatus.OK);
@@ -65,15 +64,34 @@ public class GuestController {
     /**
      * 注册接口
      *
+     * @param request  request
      * @param username 用户名
      * @param password 密码
      * @return {"success":boolean,"message":string}
      */
     @RequestMapping(value = "/register.action", method = RequestMethod.POST)
-    public ResponseEntity<Map> register(@RequestParam String username, @RequestParam String password) {
+    public ResponseEntity<Map> register(HttpServletRequest request, @RequestParam String username, @RequestParam String password) {
         Map<String, Object> map = new HashMap<>();
-        //TODO:注册接口
 
+        int registerStatus = userService.register(request, username, password);
+        map.put("success", registerStatus == UserServiceImpl.REGISTER_SUCCESS);
+        String msg;
+        switch (registerStatus) {
+            case UserServiceImpl.REGISTER_SUCCESS:
+                msg = "注册成功";
+                break;
+            case UserServiceImpl.REGISTER_FAIL_USERNAME_REPEAT:
+                msg = "用户名已存在";
+                break;
+            case UserServiceImpl.REGISTER_FAIL_PARAM_ILLEGAL:
+                msg = "参数解析异常";
+                break;
+
+            case UserServiceImpl.REGISTER_FAIL_SYS_ERR:
+            default:
+                msg = "未知异常,无法注册,请联系管理员!";
+        }
+        map.put("message", msg);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 }
