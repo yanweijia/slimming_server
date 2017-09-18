@@ -8,6 +8,7 @@ public interface IUserService {
 
     /**
      * 通过编号获取用户实例
+     *
      * @param id 用户编号
      * @return
      */
@@ -15,6 +16,7 @@ public interface IUserService {
 
     /**
      * 删除一个用户
+     *
      * @param id 用户编号
      * @return 是否成功
      */
@@ -22,6 +24,7 @@ public interface IUserService {
 
     /**
      * 插入一个用户
+     *
      * @param record 用户信息
      * @return
      */
@@ -29,6 +32,7 @@ public interface IUserService {
 
     /**
      * 插入一个新用户
+     *
      * @param record 用户信息
      * @return
      */
@@ -36,6 +40,7 @@ public interface IUserService {
 
     /**
      * 修改用户信息
+     *
      * @param record 用户信息
      * @return
      */
@@ -43,6 +48,7 @@ public interface IUserService {
 
     /**
      * 选择性修改用户信息
+     *
      * @param record 用户信息
      * @return
      */
@@ -51,20 +57,31 @@ public interface IUserService {
 
     /**
      * 修改密码
-     * @param id 用户编号
+     *
+     * @param id    用户编号
      * @param oldPw 旧密码
      * @param newPw 新密码
      * @return 常量:UserServiceImpl.CHANGE_PW_开头
      */
-    int changePassword(Integer id,String oldPw,String newPw);
+    int changePassword(Integer id, String oldPw, String newPw);
 
     /**
      * 用户登录请求
-     * @param session session
+     *
+     * @param session  session
      * @param username 用户名
      * @param password 密码
      * @return 常量:UserServiceImpl.LOGIN_开头
      */
     int login(HttpSession session, String username, String password);
+
+    /**
+     * 注册新用户
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @return 常量:UserServiceImpl.REGISTER_开头
+     */
+    int register(String username, String password);
 
 }
