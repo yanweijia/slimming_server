@@ -31,7 +31,7 @@ public class UserController {
      * 获取用户信息
      *
      * @param id 用户编号
-     * @return 用户信息JSON
+     * @return json: {User}
      * @throws IOException
      */
     @RequestMapping(value = "/getUserInfo.action")
@@ -44,15 +44,15 @@ public class UserController {
      * 更新用户信息,验证密码并更新,仅限 POST<br/>
      * 记得请求的时候 contentType设置为:<strong style='color:green'>application/json;charset=UTF-8</strong>
      * @param user User 的 JSON 格式请求
-     * @return
+     * @return {"success":boolean,"message":string}
      */
     @RequestMapping(value = "/updateUserInfo.action",method = RequestMethod.POST)
     public ResponseEntity<Map> updateUserInfo(@RequestBody User user) throws IOException{
         Map<String, Object> map = new HashMap<>();
-        boolean result = userService.updateById(user) != 0;
-        map.put("result",result);
-        map.put("message",(result?"修改成功.":"修改失败."));
-        return new ResponseEntity<Map>(map, HttpStatus.OK);
+        boolean success = userService.updateUserById(user) != 0;
+        map.put("success",success);
+        map.put("message",(success?"修改成功.":"修改失败."));
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
 
@@ -61,13 +61,13 @@ public class UserController {
      * @param id 用户编号
      * @param oldPw 旧密码
      * @param newPw 新密码
-     * @return
+     * @return {"success":boolean,"message":string}
      * @throws IOException
      */
     @RequestMapping(value="",method=RequestMethod.POST)
     public ResponseEntity<Map> changePassword(@RequestParam Integer id,@RequestParam String oldPw,@RequestParam String newPw)throws  IOException{
         Map<String,Object> map = new HashMap<>();
-        boolean result = false;
+        boolean success = false;
         String message = "未知错误";
         if(id==null||id<0|| StringUtils.isEmpty(oldPw)||StringUtils.isEmpty(newPw)){
             message = "参数传递有误";
@@ -77,8 +77,8 @@ public class UserController {
                 user = new User();
                 user.setId(id);
                 user.setPassword(newPw);
-                if(userService.updateByIdSelective(user)!=0) {
-                    result = true;
+                if(userService.updateUserByIdSelective(user)!=0) {
+                    success = true;
                     message = "修改成功!";
                 }else
                     message = "系统异常,修改失败";
@@ -86,10 +86,9 @@ public class UserController {
                 message = "用户不存在或旧密码错误!";
             }
         }
-
-        map.put("result",result);
+        map.put("success",success);
         map.put("message",message);
-        return new ResponseEntity<Map>(map,HttpStatus.OK);
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
 }

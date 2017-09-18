@@ -2,6 +2,8 @@ package cn.yanweijia.slimming.service;
 
 import cn.yanweijia.slimming.model.User;
 
+import javax.servlet.http.HttpSession;
+
 public interface IUserService {
 
     /**
@@ -16,34 +18,44 @@ public interface IUserService {
      * @param id 用户编号
      * @return 是否成功
      */
-    int deleteByPrimaryKey(Integer id);
+    int deleteUserById(Integer id);
 
     /**
-     * 插入用户
+     * 插入一个用户
      * @param record 用户信息
      * @return
      */
-    int insertUser(User record);
+    int addUser(User record);
 
     /**
      * 插入一个新用户
      * @param record 用户信息
      * @return
      */
-    int insertNewUser(User record);
+    int saveUser(User record);
 
     /**
      * 修改用户信息
      * @param record 用户信息
      * @return
      */
-    int updateById(User record);
+    int updateUserById(User record);
 
     /**
      * 选择性修改用户信息
      * @param record 用户信息
      * @return
      */
-    int updateByIdSelective(User record);
+    int updateUserByIdSelective(User record);
+
+
+    /**
+     * 用户登录请求
+     * @param session session
+     * @param username 用户名
+     * @param password 密码
+     * @return
+     */
+    int login(HttpSession session, String username, String password);
 
 }
