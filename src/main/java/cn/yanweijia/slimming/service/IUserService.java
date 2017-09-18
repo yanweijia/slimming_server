@@ -50,11 +50,20 @@ public interface IUserService {
 
 
     /**
+     * 修改密码
+     * @param id 用户编号
+     * @param oldPw 旧密码
+     * @param newPw 新密码
+     * @return 常量:UserServiceImpl.CHANGE_PW_开头
+     */
+    int changePassword(Integer id,String oldPw,String newPw);
+
+    /**
      * 用户登录请求
      * @param session session
      * @param username 用户名
      * @param password 密码
-     * @return
+     * @return 常量:UserServiceImpl.LOGIN_开头
      */
     int login(HttpSession session, String username, String password);
 

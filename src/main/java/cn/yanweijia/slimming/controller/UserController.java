@@ -2,6 +2,7 @@ package cn.yanweijia.slimming.controller;
 
 import cn.yanweijia.slimming.model.User;
 import cn.yanweijia.slimming.service.IUserService;
+import cn.yanweijia.slimming.service.impl.UserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -74,29 +75,30 @@ public class UserController {
     @RequestMapping(value = "/changePassword.action", method = RequestMethod.POST)
     public ResponseEntity<Map> changePassword(@RequestParam Integer id, @RequestParam String oldPw, @RequestParam String newPw) throws IOException {
         Map<String, Object> map = new HashMap<>();
-        boolean success = false;
-        String message = "未知错误";
-        if (id == null || id < 0 || StringUtils.isEmpty(oldPw) || StringUtils.isEmpty(newPw)) {
-            message = "参数传递有误";
-        } else if (oldPw.equals(newPw)) {
-            message = "旧密码与新密码相同,修改失败!";
-        } else {
-            User user = userService.getUserById(id);
-            if (user != null && user.getPassword().equals(oldPw)) {
-                user = new User();
-                user.setId(id);
-                user.setPassword(newPw);
-                if (userService.updateUserByIdSelective(user) != 0) {
-                    success = true;
-                    message = "修改成功!";
-                } else
-                    message = "系统异常,修改失败";
-            } else {
-                message = "用户不存在或旧密码错误!";
-            }
+        int result = userService.changePassword(id, oldPw, newPw);
+        String msg;
+        switch (result) {
+            case UserServiceImpl.CHANGE_PW_FAIL_ILLEGAL_PW:
+                msg = "密码参数格式不正确,请使用大写的32位MD5";
+                break;
+            case UserServiceImpl.CHANGE_PW_FAIL_NO_USER_OR_WRONG_OLD_PW:
+                msg = "旧密码不匹配或用户不存在";
+                break;
+            case UserServiceImpl.CHANGE_PW_FAIL_PARAM_ERR:
+                msg = "参数格式不正确";
+                break;
+            case UserServiceImpl.CHANGE_PW_FAIL_SAME_PW:
+                msg = "旧密码与新密码相同";
+                break;
+            case UserServiceImpl.CHANGE_PW_SUCCESS:
+                msg = "修改密码成功";
+                break;
+            case UserServiceImpl.CHANGE_PW_FAIL_SYS_ERR:
+            default:
+                msg = "系统错误";
         }
-        map.put("success", success);
-        map.put("message", message);
+        map.put("success", result == UserServiceImpl.CHANGE_PW_SUCCESS);
+        map.put("message", msg);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 

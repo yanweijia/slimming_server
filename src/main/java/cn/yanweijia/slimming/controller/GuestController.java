@@ -61,6 +61,19 @@ public class GuestController {
         map.put("message", msg);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
-    //TODO:注册接口
 
+    /**
+     * 注册接口
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @return {"success":boolean,"message":string}
+     */
+    @RequestMapping(value = "/register.action", method = RequestMethod.POST)
+    public ResponseEntity<Map> register(@RequestParam String username, @RequestParam String password) {
+        Map<String, Object> map = new HashMap<>();
+        //TODO:注册接口
+
+        return new ResponseEntity<>(map, HttpStatus.OK);
+    }
 }

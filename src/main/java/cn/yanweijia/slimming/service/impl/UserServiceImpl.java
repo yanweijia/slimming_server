@@ -23,6 +23,20 @@ public class UserServiceImpl implements IUserService {
     public static final int LOGIN_USER_FORBIDDEN = 2;
     /** 用户名密码不匹配 */
     public static final int LOGIN_PW_NOT_MATCH = 3;
+    /** 修改密码成功 */
+    public static final int CHANGE_PW_SUCCESS = 1;
+    /** 修改密码失败,旧密码与新密码相同 */
+    public static final int CHANGE_PW_FAIL_SAME_PW = 2;
+    /** 修改密码失败,旧密码错误或不存在此用户 */
+    public static final int CHANGE_PW_FAIL_NO_USER_OR_WRONG_OLD_PW = 3;
+    /** 修改密码失败,无效的新密码 */
+    public static final int CHANGE_PW_FAIL_ILLEGAL_PW = 4;
+    /** 修改密码失败,参数传递异常 */
+    public static final int CHANGE_PW_FAIL_PARAM_ERR = 5;
+    /** 修改密码失败,系统错误 */
+    public static final int CHANGE_PW_FAIL_SYS_ERR = 6;
+
+
     @Resource
     private IUserDAO userDao;
 
@@ -63,6 +77,30 @@ public class UserServiceImpl implements IUserService {
     public int updateUserByIdSelective(User record) {
         Integer id = record.getId();
         return (id == null || id < 0) ? 0 : userDao.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public int changePassword(Integer id, String oldPw, String newPw) {
+        if (id == null || id < 0 || StringUtils.isEmpty(oldPw) || StringUtils.isEmpty(newPw)) {
+            return CHANGE_PW_FAIL_PARAM_ERR;
+        }else if(newPw.length() != 32){
+            return CHANGE_PW_FAIL_ILLEGAL_PW;
+        }else if (oldPw.equals(newPw)) {
+            return CHANGE_PW_FAIL_SAME_PW;
+        } else {
+            User user = this.getUserById(id);
+            if (user != null && user.getPassword().equals(oldPw)) {
+                user = new User();
+                user.setId(id);
+                user.setPassword(newPw);
+                if (this.updateUserByIdSelective(user) != 0) {
+                    return CHANGE_PW_SUCCESS;
+                } else
+                    return CHANGE_PW_FAIL_SYS_ERR;
+            } else {
+                return CHANGE_PW_FAIL_NO_USER_OR_WRONG_OLD_PW;
+            }
+        }
     }
 
     @Override
