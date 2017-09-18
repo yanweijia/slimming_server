@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -91,4 +92,23 @@ public class UserController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
+
+    /**
+     * 登出(注销)
+     * @param session session
+     * @return {"success":boolean,"message":string}
+     */
+    @RequestMapping(value="/logout.action")
+    public ResponseEntity<Map> logout(HttpSession session){
+        Map<String,Object> map = new HashMap<>();
+        boolean success = false;
+        if(session.getAttribute("id")!=null) {
+            session.removeAttribute("id");
+            session.removeAttribute("username");
+            success = true;
+        }
+        map.put("success",success);
+        map.put("message",(success?"注销成功!":"注销失败,您本来就不在线上!"));
+        return new ResponseEntity<>(map,HttpStatus.OK);
+    }
 }
