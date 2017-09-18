@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
@@ -31,7 +32,7 @@ public class GuestController {
      * @param password 密码
      * @return {"success":boolean,"message":string}
      */
-    @RequestMapping(value="")
+    @RequestMapping(value="/login.action",method= RequestMethod.POST)
     public ResponseEntity<Map> login(HttpSession httpSession,@RequestParam String username, @RequestParam String password){
         Map<String,Object> map = new HashMap<>();
         int loginStatus = userService.login(httpSession,username,password);

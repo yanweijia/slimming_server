@@ -64,7 +64,7 @@ public class UserController {
      * @return {"success":boolean,"message":string}
      * @throws IOException
      */
-    @RequestMapping(value="",method=RequestMethod.POST)
+    @RequestMapping(value="/changePassword.action",method=RequestMethod.POST)
     public ResponseEntity<Map> changePassword(@RequestParam Integer id,@RequestParam String oldPw,@RequestParam String newPw)throws  IOException{
         Map<String,Object> map = new HashMap<>();
         boolean success = false;
