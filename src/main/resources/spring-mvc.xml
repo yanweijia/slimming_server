@@ -26,7 +26,8 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-
+    <!--异常的统一处理-->
+    <bean id="exceptionResolver" class="cn.yanweijia.slimming.controller.handler.ExceptionHandler"/>
 
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
         <property name="messageConverters">
@@ -36,6 +37,7 @@
         </property>
     </bean>
 
+    <!--返回 ResponseEntity<E> 转 JSON-->
     <bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <property name="supportedMediaTypes">
             <list>
