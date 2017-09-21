@@ -37,9 +37,13 @@ public class UserController {
      * @throws IOException
      */
     @RequestMapping(value = "/getUserInfo.action")
-    public ResponseEntity<User> getUserInfo(@RequestParam Integer id) throws IOException {
+    public ResponseEntity<Map> getUserInfo(@RequestParam Integer id) throws IOException {
+        Map<String,Object> map = new HashMap<>();
         User user = userService.getUserById(id);
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+        map.put("success",true);
+        map.put("message","获取成功");
+        map.put("User",user);
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
     /**

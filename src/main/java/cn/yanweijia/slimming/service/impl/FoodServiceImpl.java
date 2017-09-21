@@ -5,11 +5,13 @@ import cn.yanweijia.slimming.dao.IFoodDAO;
 import cn.yanweijia.slimming.dao.IFoodMeasurementDAO;
 import cn.yanweijia.slimming.model.*;
 import cn.yanweijia.slimming.service.IFoodService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service("foodService")
 public class FoodServiceImpl implements IFoodService {
     @Resource
     private IFoodDAO foodDAO;
