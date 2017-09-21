@@ -1,6 +1,7 @@
 package cn.yanweijia.slimming.controller;
 
 
+import cn.yanweijia.slimming.model.FoodMeasurement;
 import cn.yanweijia.slimming.service.IFoodService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -56,7 +58,7 @@ public class FoodController {
     }
 
     /**
-     * 根据食物名称获取食物信息
+     * 根据食物名称搜索获取食物信息
      *
      * @param name 食物名称
      * @return {"success":boolean,"message":String,"foodName":String,"foods":JSONArray(foods)}
@@ -69,6 +71,25 @@ public class FoodController {
         map.put("message", "");
         map.put("foodName", name);
         map.put("foods", foodService.listFoodByName(name));
+        return new ResponseEntity<>(map, HttpStatus.OK);
+    }
+
+
+    /**
+     * 根据食物编号获取食物计量信息
+     *
+     * @param foodId 食物编号
+     * @return {"success":boolean,"message":String,"foodId":int,"foodMeasurement":JSONArray(FoodMeasurement)}
+     * @throws IOException
+     */
+    @RequestMapping("/listFoodMeasurementByFoodID")
+    public ResponseEntity<Map> listFoodMeasurementByFoodID(Integer foodId) throws IOException {
+        Map<String, Object> map = new HashMap<>();
+        List<FoodMeasurement> list = foodService.listFoodMeasurementByFoodId(foodId);
+        map.put("success", true);
+        map.put("message", list.isEmpty() ? "该食物没有计量信息" : "");
+        map.put("foodId", foodId);
+        map.put("foodMeasurement", list);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 }
