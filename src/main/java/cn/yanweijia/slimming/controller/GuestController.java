@@ -34,7 +34,7 @@ public class GuestController {
      * @param password    密码
      * @return {"success":boolean,"message":string}
      */
-    @RequestMapping(value = "/login.action", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<Map> login(HttpSession httpSession, @RequestParam String username, @RequestParam String password) {
         Map<String, Object> map = new HashMap<>();
         int loginStatus = userService.login(httpSession, username, password);
@@ -69,7 +69,7 @@ public class GuestController {
      * @param password 密码
      * @return {"success":boolean,"message":string}
      */
-    @RequestMapping(value = "/register.action", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<Map> register(HttpServletRequest request, @RequestParam String username, @RequestParam String password) {
         Map<String, Object> map = new HashMap<>();
 

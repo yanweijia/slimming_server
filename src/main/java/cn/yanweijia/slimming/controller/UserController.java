@@ -36,7 +36,7 @@ public class UserController {
      * @return {"success":boolean,"message",string,"User":{User}}
      * @throws IOException
      */
-    @RequestMapping(value = "/getUserInfo.action")
+    @RequestMapping(value = "/getUserInfo")
     public ResponseEntity<Map> getUserInfo(@RequestParam Integer id) throws IOException {
         Map<String, Object> map = new HashMap<>();
         User user = userService.getUserById(id);
@@ -56,7 +56,7 @@ public class UserController {
      * @param user User 的 JSON 格式请求
      * @return {"success":boolean,"message":string}
      */
-    @RequestMapping(value = "/updateUserInfo.action", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateUserInfo", method = RequestMethod.POST)
     public ResponseEntity<Map> updateUserInfo(@RequestBody User user) throws IOException {
         Map<String, Object> map = new HashMap<>();
         boolean success = userService.updateUserById(user) != 0;
@@ -75,7 +75,7 @@ public class UserController {
      * @return {"success":boolean,"message":string}
      * @throws IOException
      */
-    @RequestMapping(value = "/changePassword.action", method = RequestMethod.POST)
+    @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
     public ResponseEntity<Map> changePassword(@RequestParam Integer id, @RequestParam String oldPw, @RequestParam String newPw) throws IOException {
         Map<String, Object> map = new HashMap<>();
         int result = userService.changePassword(id, oldPw, newPw);
@@ -112,7 +112,7 @@ public class UserController {
      * @param session session
      * @return {"success":boolean,"message":string}
      */
-    @RequestMapping(value = "/logout.action")
+    @RequestMapping(value = "/logout")
     public ResponseEntity<Map> logout(HttpSession session) throws IOException {
         Map<String, Object> map = new HashMap<>();
         boolean success = false;
