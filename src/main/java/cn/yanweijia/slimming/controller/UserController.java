@@ -33,16 +33,16 @@ public class UserController {
      * 获取用户信息
      *
      * @param id 用户编号
-     * @return json: {User}
+     * @return {"success":boolean,"message",string,"User":{User}}
      * @throws IOException
      */
     @RequestMapping(value = "/getUserInfo.action")
     public ResponseEntity<Map> getUserInfo(@RequestParam Integer id) throws IOException {
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         User user = userService.getUserById(id);
-        map.put("success",true);
-        map.put("message","获取成功");
-        map.put("User",user);
+        map.put("success", true);
+        map.put("message", "获取成功");
+        map.put("User", user);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
@@ -113,7 +113,7 @@ public class UserController {
      * @return {"success":boolean,"message":string}
      */
     @RequestMapping(value = "/logout.action")
-    public ResponseEntity<Map> logout(HttpSession session) {
+    public ResponseEntity<Map> logout(HttpSession session) throws IOException {
         Map<String, Object> map = new HashMap<>();
         boolean success = false;
         if (session.getAttribute("id") != null) {
