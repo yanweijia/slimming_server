@@ -39,9 +39,12 @@ public class GuestController {
         Map<String, Object> map = new HashMap<>();
         int loginStatus = userService.login(httpSession, username, password);
 
-        map.put("success", loginStatus == UserServiceImpl.LOGIN_SUCCESS);
+        map.put("success", loginStatus == UserServiceImpl.LOGIN_SUCCESS || loginStatus == UserServiceImpl.LOGIN_ALREADY_IN);
         String msg;
         switch (loginStatus) {
+            case UserServiceImpl.LOGIN_ALREADY_IN:
+                msg = "已经登陆过,不需重复登录.";
+                break;
             case UserServiceImpl.LOGIN_SUCCESS:
                 msg = "登录成功";
                 break;

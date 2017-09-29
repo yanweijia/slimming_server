@@ -34,45 +34,49 @@ public class UserServiceImpl implements IUserService {
      */
     public static final int LOGIN_PW_NOT_MATCH = 3;
     /**
+     * 已经登陆过了,不用重复登录
+     */
+    public static final int LOGIN_ALREADY_IN = 4;
+    /**
      * 修改密码成功
      */
-    public static final int CHANGE_PW_SUCCESS = 4;
+    public static final int CHANGE_PW_SUCCESS = 5;
     /**
      * 修改密码失败,旧密码与新密码相同
      */
-    public static final int CHANGE_PW_FAIL_SAME_PW = 5;
+    public static final int CHANGE_PW_FAIL_SAME_PW = 6;
     /**
      * 修改密码失败,旧密码错误或不存在此用户
      */
-    public static final int CHANGE_PW_FAIL_NO_USER_OR_WRONG_OLD_PW = 6;
+    public static final int CHANGE_PW_FAIL_NO_USER_OR_WRONG_OLD_PW = 7;
     /**
      * 修改密码失败,无效的新密码
      */
-    public static final int CHANGE_PW_FAIL_ILLEGAL_PW = 7;
+    public static final int CHANGE_PW_FAIL_ILLEGAL_PW = 8;
     /**
      * 修改密码失败,参数传递异常
      */
-    public static final int CHANGE_PW_FAIL_PARAM_ERR = 8;
+    public static final int CHANGE_PW_FAIL_PARAM_ERR = 9;
     /**
      * 修改密码失败,系统错误
      */
-    public static final int CHANGE_PW_FAIL_SYS_ERR = 9;
+    public static final int CHANGE_PW_FAIL_SYS_ERR = 10;
     /**
      * 注册成功
      */
-    public static final int REGISTER_SUCCESS = 10;
+    public static final int REGISTER_SUCCESS = 11;
     /**
      * 注册失败,已存在同名用户
      */
-    public static final int REGISTER_FAIL_USERNAME_REPEAT = 11;
+    public static final int REGISTER_FAIL_USERNAME_REPEAT = 12;
     /**
      * 注册失败,参数非法
      */
-    public static final int REGISTER_FAIL_PARAM_ILLEGAL = 12;
+    public static final int REGISTER_FAIL_PARAM_ILLEGAL = 13;
     /**
      * 注册失败,系统错误
      */
-    public static final int REGISTER_FAIL_SYS_ERR = 13;
+    public static final int REGISTER_FAIL_SYS_ERR = 14;
 
     @Resource
     private IUserDAO userDao;
@@ -142,6 +146,9 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public int login(HttpSession session, String username, String password) {
+        if(session.getAttribute("id")!=null){
+            return LOGIN_ALREADY_IN;
+        }
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password))
             return LOGIN_INPUT_ILLEGAL;
 
