@@ -59,7 +59,7 @@ public class UserController {
     @RequestMapping(value = "/updateUserInfo", method = RequestMethod.POST)
     public ResponseEntity<Map> updateUserInfo(@RequestBody User user) throws IOException {
         Map<String, Object> map = new HashMap<>();
-        boolean success = userService.updateUserById(user) != 0;
+        boolean success = userService.updateUserByIdSelective(user) != 0;
         map.put("success", success);
         map.put("message", (success ? "修改成功." : "修改失败."));
         return new ResponseEntity<>(map, HttpStatus.OK);
