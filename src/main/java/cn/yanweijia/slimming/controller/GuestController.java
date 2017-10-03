@@ -1,6 +1,7 @@
 package cn.yanweijia.slimming.controller;
 
 
+import cn.yanweijia.slimming.model.User;
 import cn.yanweijia.slimming.service.IUserService;
 import cn.yanweijia.slimming.service.impl.UserServiceImpl;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,6 @@ import java.util.Map;
 public class GuestController {
     @Resource
     private IUserService userService;
-
     /**
      * 登录接口
      *
@@ -44,9 +44,13 @@ public class GuestController {
         switch (loginStatus) {
             case UserServiceImpl.LOGIN_ALREADY_IN:
                 msg = "已经登陆过,不需重复登录.";
+                //放user信息
+                map.put("user",userService.getUserByUsername(username));
                 break;
             case UserServiceImpl.LOGIN_SUCCESS:
                 msg = "登录成功";
+                map.put("user",userService.getUserByUsername(username));
+                //放user信息
                 break;
             case UserServiceImpl.LOGIN_USER_FORBIDDEN:
                 msg = "用户已被禁止登录";

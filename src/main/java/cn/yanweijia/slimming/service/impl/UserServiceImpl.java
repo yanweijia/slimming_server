@@ -146,7 +146,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public int login(HttpSession session, String username, String password) {
-        if(session.getAttribute("id")!=null){
+        if (session.getAttribute("id") != null) {
             return LOGIN_ALREADY_IN;
         }
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password))
@@ -172,7 +172,7 @@ public class UserServiceImpl implements IUserService {
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password) || password.length() != 32)
             return REGISTER_FAIL_PARAM_ILLEGAL;
         UserExample userExample = new UserExample();
-        userExample.or().andUsernameEqualTo(username);
+        userExample.or().andUsernameEqualTo(username); 
         List<User> userList = userDao.selectByExample(userExample);
         if (userList.size() != 0)
             return REGISTER_FAIL_USERNAME_REPEAT;
@@ -184,13 +184,26 @@ public class UserServiceImpl implements IUserService {
             user.setRegTime(new Date());
             user.setLastLogin(new Date());
             String ipAddr = RequestUtils.getIPAddr(request);
-            ipAddr = ipAddr.length()>50?ipAddr.substring(0,50):ipAddr;
+            ipAddr = ipAddr.length() > 50 ? ipAddr.substring(0, 50) : ipAddr;
             user.setRegIp(ipAddr);
             if (userDao.insertSelective(user) == 0)
                 return REGISTER_FAIL_SYS_ERR;
         }
 
         return REGISTER_SUCCESS;
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        if (StringUtils.isEmpty(username))
+            return null;
+        UserExample userExample = new UserExample();
+        userExample.or().andUsernameEqualTo(username);
+        List<User> users = userDao.selectByExample(userExample);
+        if (users.size() == 0)
+            return null;
+        else
+            return users.get(0);
     }
 
 }

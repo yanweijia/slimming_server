@@ -83,6 +83,12 @@ public interface IUserService {
      * @param password 密码
      * @return 常量:UserServiceImpl.REGISTER_开头
      */
-    int register(HttpServletRequest request,String username, String password);
+    int register(HttpServletRequest request, String username, String password);
 
+    /**
+     * 通过用户名获取User信息
+     * @param username 用户名
+     * @return user
+     */
+    User getUserByUsername(String username);
 }
