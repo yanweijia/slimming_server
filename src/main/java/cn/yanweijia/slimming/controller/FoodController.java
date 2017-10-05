@@ -1,6 +1,8 @@
 package cn.yanweijia.slimming.controller;
 
 
+import cn.yanweijia.slimming.model.Food;
+import cn.yanweijia.slimming.model.FoodCategory;
 import cn.yanweijia.slimming.model.FoodMeasurement;
 import cn.yanweijia.slimming.service.IFoodService;
 import org.springframework.http.HttpStatus;
@@ -90,6 +92,25 @@ public class FoodController {
         map.put("message", list.isEmpty() ? "该食物没有计量信息" : "");
         map.put("foodId", foodId);
         map.put("foodMeasurement", list);
+        return new ResponseEntity<>(map, HttpStatus.OK);
+    }
+
+    /**
+     * 推荐食物给用户
+     *
+     * @param userid 用户编号,根据用户来进行推荐
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping("/recommend")
+    public ResponseEntity<Map> recommend(Integer userid) throws IOException {
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", true);
+        map.put("message", "推荐成功");
+        List<FoodCategory> foodCategories = foodService.listFoodCategory();
+        int category = (int) (Math.random() * foodCategories.size());
+        List<Food> foods = foodService.listFoodByCategory(category);
+        map.put("food", foods.get((int) (Math.random() * foods.size())));
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 }
