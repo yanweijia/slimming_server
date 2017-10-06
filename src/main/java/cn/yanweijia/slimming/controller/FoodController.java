@@ -26,6 +26,23 @@ public class FoodController {
     @Resource
     private IFoodService foodService;
 
+
+    /**
+     * 根据食物编号获取食物信息
+     *
+     * @param foodId
+     * @return
+     */
+    @RequestMapping("/getFoodInfo")
+    public ResponseEntity<Map> getFoodInfo(Integer foodId) throws IOException {
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", true);
+        map.put("message", "");
+        map.put("food", foodService.getFoodInfoById(foodId));
+        return new ResponseEntity<>(map, HttpStatus.OK);
+    }
+
+
     /**
      * 获取所有食物分类
      *
