@@ -2,12 +2,10 @@ package cn.yanweijia.slimming.dao;
 
 import cn.yanweijia.slimming.model.BloodGlucose;
 import cn.yanweijia.slimming.model.BloodGlucoseExample;
-
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 
-public interface IBloodGlucose {
+public interface IBloodGlucoseDAO {
     long countByExample(BloodGlucoseExample example);
 
     int deleteByExample(BloodGlucoseExample example);
