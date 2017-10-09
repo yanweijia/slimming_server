@@ -93,7 +93,7 @@ public interface IHealthService {
      * 保存一个心率信息
      *
      * @param heartRate 心率信息,userid不为空
-     * @return HealthServiceImpl.SAVE_ 开头
+     * @return 为0失败
      */
     int saveHeartRate(HeartRate heartRate);
 
@@ -101,7 +101,7 @@ public interface IHealthService {
      * 保存用户血糖信息
      *
      * @param bloodGlucose 血糖信息,userid不为空
-     * @return HealthServiceImpl.SAVE_ 开头
+     * @return 为0失败
      */
     int saveBloodGlucose(BloodGlucose bloodGlucose);
 
@@ -109,7 +109,7 @@ public interface IHealthService {
      * 保存用户血压信息
      *
      * @param bloodPressure 血压信息,userid不为空
-     * @return HealthServiceImpl.SAVE_ 开头
+     * @return 为0失败
      */
     int saveBloodPressure(BloodPressure bloodPressure);
 
@@ -117,7 +117,7 @@ public interface IHealthService {
      * 保存用户体重信息
      *
      * @param userWeight 体重信息,userid不为空
-     * @return HealthServiceImpl.SAVE_ 开头
+     * @return 为0失败
      */
     int saveUserWeight(UserWeight userWeight);
 

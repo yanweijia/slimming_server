@@ -14,14 +14,6 @@ import java.util.List;
 
 @Service("healthService")
 public class HealthServiceImpl implements IHealthService {
-    /**
-     * 保存成功
-     */
-    public static final int SAVE_SUCCESS = 1;
-    /**
-     * 保存失败
-     */
-    public static final int SAVE_FAIL = 2;
     @Resource
     private IHeartRateDAO heartRateDAO;
     @Resource
@@ -90,28 +82,24 @@ public class HealthServiceImpl implements IHealthService {
     @Override
     public int saveHeartRate(HeartRate heartRate) {
         heartRate.setId(null);
-        int count = heartRateDAO.insert(heartRate);
-        return count != 0 ? SAVE_SUCCESS : SAVE_FAIL;
+        return heartRateDAO.insert(heartRate);
     }
 
     @Override
     public int saveBloodGlucose(BloodGlucose bloodGlucose) {
         bloodGlucose.setId(null);
-        int count = bloodGlucoseDAO.insert(bloodGlucose);
-        return count != 0 ? SAVE_SUCCESS : SAVE_FAIL;
+        return bloodGlucoseDAO.insert(bloodGlucose);
     }
 
     @Override
     public int saveBloodPressure(BloodPressure bloodPressure) {
         bloodPressure.setId(null);
-        int count = bloodPressureDAO.insert(bloodPressure);
-        return count != 0 ? SAVE_SUCCESS : SAVE_FAIL;
+        return bloodPressureDAO.insert(bloodPressure);
     }
 
     @Override
     public int saveUserWeight(UserWeight userWeight) {
         userWeight.setId(null);
-        int count = userWeightDAO.insert(userWeight);
-        return count != 0 ? SAVE_SUCCESS : SAVE_FAIL;
+        return userWeightDAO.insert(userWeight);
     }
 }
