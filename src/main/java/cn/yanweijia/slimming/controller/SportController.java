@@ -56,11 +56,17 @@ public class SportController {
      */
     @RequestMapping(value = "run/upload", method = RequestMethod.POST)
     public ResponseEntity<Map> uploadRunRecord(HttpSession session, @RequestBody RunRecord runRecord) throws IOException {
-        int userid = (int) session.getAttribute("id");
+        int userid;
+        try {
+            userid = (int) session.getAttribute("id");
+        } catch (Exception e) {
+            userid = runRecord.getUserId();
+        }
         runRecord.setUserId(userid);
         Map<String, Object> map = new HashMap<>();
         map.put("success", true);
         map.put("message", null);
+        sportService.saveRunRecoard(runRecord);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
