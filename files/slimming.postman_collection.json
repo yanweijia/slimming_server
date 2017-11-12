@@ -1,0 +1,799 @@
+{
+  "info": {
+    "name": "slimming",
+    "_postman_id": "ccf52b62-e6c6-f10d-4cac-d0f250d2242d",
+    "description": "",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "User相关",
+      "description": "",
+      "item": [
+        {
+          "name": "登出 /user/logout",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {},
+            "url": {
+              "raw": "http://localhost:8080/slimming/api/user/logout",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "slimming",
+                "api",
+                "user",
+                "logout"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "登录  /guest/login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json;charset=UTF-8"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "username",
+                  "value": "yanweijia",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "DC993966AD1D441E91E854F438396760",
+                  "description": "",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8080/slimming/api/guest/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "slimming",
+                "api",
+                "guest",
+                "login"
+              ],
+              "query": [
+                {
+                  "key": "username",
+                  "value": "yanweijia",
+                  "equals": true,
+                  "disabled": true
+                },
+                {
+                  "key": "password",
+                  "value": "DC993966AD1D441E91E854F438396760",
+                  "equals": true,
+                  "disabled": true
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "更新用户信息  /user/updateUserInfo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\":1,\"username\":\"yanweijia\",\"password\":\"DC993966AD1D441E91E854F438396760\",\"phone\":\"18621703545\",\"email\":\"admin@yanweijia.cn\",\"name\":\"严唯嘉\",\"birthday\":null,\"gender\":\"男\",\"height\":178,\"weight\":75.1,\"status\":0,\"regTime\":1505577600000,\"regIp\":\"127.0.0.1\",\"lastLogin\":1505577600000}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/slimming/api/user/updateUserInfo",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "slimming",
+                "api",
+                "user",
+                "updateUserInfo"
+              ],
+              "query": [
+                {
+                  "key": "username",
+                  "value": "yanweijia",
+                  "equals": true,
+                  "disabled": true
+                },
+                {
+                  "key": "password",
+                  "value": "DC993966AD1D441E91E854F438396760",
+                  "equals": true,
+                  "disabled": true
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "修改密码 /changePassword",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "oldPw",
+                  "value": "DC993966AD1D441E91E854F438396760",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "newPw",
+                  "value": "DC993966AD1D441E91E854F438396760",
+                  "description": "",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://server.yanweijia.cn:8080/slimming/api/user/changePassword",
+              "protocol": "http",
+              "host": [
+                "server",
+                "yanweijia",
+                "cn"
+              ],
+              "port": "8080",
+              "path": [
+                "slimming",
+                "api",
+                "user",
+                "changePassword"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "注册用户 /guest/register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "username",
+                  "value": "testregister2",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "DC993966AD1D441E91E854F438396760",
+                  "description": "",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8080/slimming/api/guest/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "slimming",
+                "api",
+                "guest",
+                "register"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "获取用户信息 /user/getUserInfo?id=1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {},
+            "url": {
+              "raw": "http://localhost:8080/slimming/api/user/getUserInfo?id=1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "slimming",
+                "api",
+                "user",
+                "getUserInfo"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "equals": true
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Food相关",
+      "description": "",
+      "item": [
+        {
+          "name": "食物分类列表 /food/listCategory",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {},
+            "url": {
+              "raw": "http://server.yanweijia.cn:8080/slimming/api/food/listCategory",
+              "protocol": "http",
+              "host": [
+                "server",
+                "yanweijia",
+                "cn"
+              ],
+              "port": "8080",
+              "path": [
+                "slimming",
+                "api",
+                "food",
+                "listCategory"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "获取食物信息 /food/getFoodInfo",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {},
+            "url": {
+              "raw": "http://server.yanweijia.cn:8080/slimming/api/food/getFoodInfo?foodId=1",
+              "protocol": "http",
+              "host": [
+                "server",
+                "yanweijia",
+                "cn"
+              ],
+              "port": "8080",
+              "path": [
+                "slimming",
+                "api",
+                "food",
+                "getFoodInfo"
+              ],
+              "query": [
+                {
+                  "key": "foodId",
+                  "value": "1",
+                  "equals": true
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "食物推荐 /food/recommend",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {},
+            "url": {
+              "raw": "http://server.yanweijia.cn:8080/slimming/api/food/recommend",
+              "protocol": "http",
+              "host": [
+                "server",
+                "yanweijia",
+                "cn"
+              ],
+              "port": "8080",
+              "path": [
+                "slimming",
+                "api",
+                "food",
+                "recommend"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "根据名称获取食物信息 /food/listFoodByName?name=米饭",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {},
+            "url": {
+              "raw": "http://server.yanweijia.cn:8080/slimming/api/food/listFoodByName?name=米饭",
+              "protocol": "http",
+              "host": [
+                "server",
+                "yanweijia",
+                "cn"
+              ],
+              "port": "8080",
+              "path": [
+                "slimming",
+                "api",
+                "food",
+                "listFoodByName"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "米饭",
+                  "equals": true
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "根据分类获取食物信息 /food/listFoodByCategory?categoryId=1 copy",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {},
+            "url": {
+              "raw": "http://server.yanweijia.cn:8080/slimming/api/food/listFoodByCategory?categoryId=1",
+              "protocol": "http",
+              "host": [
+                "server",
+                "yanweijia",
+                "cn"
+              ],
+              "port": "8080",
+              "path": [
+                "slimming",
+                "api",
+                "food",
+                "listFoodByCategory"
+              ],
+              "query": [
+                {
+                  "key": "categoryId",
+                  "value": "1",
+                  "equals": true
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "获取食物计量信息 /food/listFoodMeasurementByFoodID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {},
+            "url": {
+              "raw": "http://server.yanweijia.cn:8080/slimming/api/food/listFoodMeasurementByFoodID?foodId=100",
+              "protocol": "http",
+              "host": [
+                "server",
+                "yanweijia",
+                "cn"
+              ],
+              "port": "8080",
+              "path": [
+                "slimming",
+                "api",
+                "food",
+                "listFoodMeasurementByFoodID"
+              ],
+              "query": [
+                {
+                  "key": "foodId",
+                  "value": "100",
+                  "equals": true
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Health相关",
+      "description": "",
+      "item": [
+        {
+          "name": "获取心率数据 /health/heartrate/download",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {},
+            "url": {
+              "raw": "http://server.yanweijia.cn:8080/slimming/api/health/heartrate/download?startTime=1&endTime=1607567138000",
+              "protocol": "http",
+              "host": [
+                "server",
+                "yanweijia",
+                "cn"
+              ],
+              "port": "8080",
+              "path": [
+                "slimming",
+                "api",
+                "health",
+                "heartrate",
+                "download"
+              ],
+              "query": [
+                {
+                  "key": "startTime",
+                  "value": "1",
+                  "equals": true
+                },
+                {
+                  "key": "endTime",
+                  "value": "1607567138000",
+                  "equals": true
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "上传心率数据 /health/heartrate/upload",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\": null,\"userId\": 1,\"time\": 1507479900000,\"rate\": 56,\"method\": null}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/slimming/api/health/heartrate/upload",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "slimming",
+                "api",
+                "health",
+                "heartrate",
+                "upload"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "上传血糖数据 /health/bloodglucose/upload",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\": null,\"userId\": 1,\"time\": 1507479900000,\"glucose\": 56,\"method\": null}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/slimming/api/health/bloodglucose/upload",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "slimming",
+                "api",
+                "health",
+                "bloodglucose",
+                "upload"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "上传体重数据 /health/weight/upload",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\": null,\"userId\": 1,\"time\": 1507479900000,\"weight\": 78,\"method\": null}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/slimming/api/health/weight/upload",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "slimming",
+                "api",
+                "health",
+                "weight",
+                "upload"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "上传血压数据 /health/bloodpressure/upload",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id\": null,\"userId\": 1,\"time\": 1507479900000,\"diastolicPressure\": 60,\"systolicPressure\":120,\"method\": null}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/slimming/api/health/bloodpressure/upload",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "slimming",
+                "api",
+                "health",
+                "bloodpressure",
+                "upload"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "获取血压数据 /health/bloodpressure/download",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {},
+            "url": {
+              "raw": "http://localhost:8080/slimming/api/health/bloodpressure/download?startTime=1&endTime=99999999999999",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "slimming",
+                "api",
+                "health",
+                "bloodpressure",
+                "download"
+              ],
+              "query": [
+                {
+                  "key": "startTime",
+                  "value": "1",
+                  "equals": true
+                },
+                {
+                  "key": "endTime",
+                  "value": "99999999999999",
+                  "equals": true
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "获取血糖数据 /health/bloodglucose/download",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {},
+            "url": {
+              "raw": "http://server.yanweijia.cn:8080/slimming/api/health/bloodglucose/download?startTime=1&endTime=2",
+              "protocol": "http",
+              "host": [
+                "server",
+                "yanweijia",
+                "cn"
+              ],
+              "port": "8080",
+              "path": [
+                "slimming",
+                "api",
+                "health",
+                "bloodglucose",
+                "download"
+              ],
+              "query": [
+                {
+                  "key": "startTime",
+                  "value": "1",
+                  "equals": true
+                },
+                {
+                  "key": "endTime",
+                  "value": "2",
+                  "equals": true
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "获取体重数据 /health/weight/download",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {},
+            "url": {
+              "raw": "http://server.yanweijia.cn:8080/slimming/api/health/weight/download?startTime=1&endTime=2",
+              "protocol": "http",
+              "host": [
+                "server",
+                "yanweijia",
+                "cn"
+              ],
+              "port": "8080",
+              "path": [
+                "slimming",
+                "api",
+                "health",
+                "weight",
+                "download"
+              ],
+              "query": [
+                {
+                  "key": "startTime",
+                  "value": "1",
+                  "equals": true
+                },
+                {
+                  "key": "endTime",
+                  "value": "2",
+                  "equals": true
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "sport相关",
+      "description": "",
+      "item": [
+        {
+          "name": "/sport/run/listrecord 获取跑步记录",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {},
+            "url": {
+              "raw": "http://localhost:8080/slimming/api/sport/run/listrecord?startTime=1408033238123&endTime=1608035252123",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "slimming",
+                "api",
+                "sport",
+                "run",
+                "listrecord"
+              ],
+              "query": [
+                {
+                  "key": "startTime",
+                  "value": "1408033238123",
+                  "equals": true
+                },
+                {
+                  "key": "endTime",
+                  "value": "1608035252123",
+                  "equals": true
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
