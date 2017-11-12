@@ -32,18 +32,33 @@
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
         <property name="messageConverters">
             <list>
-                <ref bean="jsonHttpMessageConverter" />
+                <ref bean="jsonHttpMessageConverter"/>
             </list>
         </property>
     </bean>
 
     <!--返回 ResponseEntity<E> 转 JSON-->
-    <bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+    <bean id="jsonHttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <property name="supportedMediaTypes">
             <list>
                 <value>application/json;charset=UTF-8</value>
             </list>
         </property>
     </bean>
+
+    <mvc:interceptors>
+        <!--日志拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="cn.yanweijia.slimming.interceptor.LogInterceptor"/>
+        </mvc:interceptor>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <!--<mvc:exclude-mapping path="/guest/*"/>-->
+            <bean class="cn.yanweijia.slimming.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 </beans>
